@@ -1,0 +1,504 @@
+/* Spline 3D background */
+.spline-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.spline-background iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(to bottom,#EDEAFF,#D8CFFF,#C9C5FF);
+    color: #2d3748;
+    min-height: 100vh;
+}
+
+/* Layout */
+.app-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.app-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.app-header h1 {
+    font-size: 2.5rem;
+    color: #4B4B77;
+    margin-bottom: 0.5rem;
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    color: #6A6A94;
+}
+
+.content-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.input-section, .output-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Cards */
+.card {
+    border-radius: 12px;
+    padding: 1.75rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.card-title {
+    font-size: 1.5rem;
+    color: #3D3D63;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Chat Section */
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.chat-messages {
+    height: 300px;
+    overflow-y: auto;
+    padding: 1rem;
+    background: rgba(248, 250, 252, 0.2);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+/* Update existing message styles */
+.message {
+    padding: 1rem;
+    border-radius: 12px;
+    max-width: 85%;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0.5rem 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.ai-message {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.9), rgba(118, 75, 162, 0.9));
+    color: white;
+    align-self: flex-start;
+}
+
+/* Add these new styles for formatted content */
+.message h3, 
+.message h4 {
+    margin: 1rem 0 0.5rem 0;
+    color: inherit;
+    font-weight: 600;
+}
+
+.message h3 {
+    font-size: 1.1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.3);
+    padding-bottom: 0.3rem;
+}
+
+.message h4 {
+    font-size: 1rem;
+}
+
+.message ul {
+    padding-left: 1.5rem;
+    margin: 0.75rem 0;
+}
+
+.message li {
+    margin-bottom: 0.5rem;
+    position: relative;
+}
+
+.message strong {
+    font-weight: 600;
+}
+
+.message em {
+    font-style: italic;
+}
+
+.chat-input input {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    transition: all 0.2s;
+    background: rgba(255, 255, 255, 0.1);
+    color: #6A6A94;
+}
+
+.chat-input input:focus {
+    outline: none;
+    border-color: rgba(102, 126, 234, 0.7);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.chat-input input::placeholder {
+    color: #6A6A94;
+}
+
+/* Form Styles */
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #3D3D63;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    transition: all 0.2s;
+    background: rgba(255, 255, 255, 0.1);
+    color: #6A6A94;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: rgba(102, 126, 234, 0.7);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.form-group input::placeholder {
+    color: #6A6A94;
+}
+
+/* Subjects List */
+.subjects-container {
+    max-height: 300px;
+    overflow-y: auto;
+    margin-bottom: 1.5rem;
+}
+
+.subject-item {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+    transition: all 0.2s;
+    backdrop-filter: blur(5px);
+}
+
+.subject-item:hover {
+    border-color: rgba(163, 191, 250, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.subject-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.subject-name {
+    font-weight: 600;
+    color: #6A6A94;
+}
+
+.days-left {
+    background: rgba(102, 126, 234, 0.9);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.subject-details {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Schedule Display */
+.schedule-container {
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.schedule-day {
+    margin-bottom: 1.5rem;
+}
+
+.schedule-date {
+    font-weight: 600;
+    color: white;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.schedule-session {
+    background: rgba(255, 255, 255, 0.1);
+    border-left: 3px solid rgba(102, 126, 234, 0.7);
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+    border-radius: 0 8px 8px 0;
+    transition: all 0.2s;
+    backdrop-filter: blur(5px);
+}
+
+.schedule-session:hover {
+    background: rgba(235, 244, 255, 0.2);
+    transform: translateX(3px);
+}
+
+.session-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.session-subject {
+    font-weight: 600;
+    color: white;
+}
+
+.session-time {
+    background: rgba(102, 126, 234, 0.9);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.session-details {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Stats */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.stat-item {
+    text-align: center;
+    padding: 1.25rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    backdrop-filter: blur(5px);
+}
+
+.stat-number {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: rgba(102, 126, 234, 0.9);
+    margin-bottom: 0.25rem;
+}
+
+.stat-label {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Buttons */
+.btn {
+    padding: 0.75rem 1.25rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.primary-btn {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.9), rgba(118, 75, 162, 0.9));
+    color: white;
+}
+
+.primary-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(102, 126, 234, 0.2);
+}
+
+.send-btn {
+    background: rgba(76, 81, 191, 0.9);
+    color: white;
+}
+
+.send-btn:hover {
+    background: rgba(67, 65, 144, 0.9);
+}
+
+.full-width {
+    width: 100%;
+}
+
+.generate-btn {
+    margin-top: 1rem;
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 2rem 1rem;
+    color: #000000;
+}
+
+.empty-state .emoji {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.empty-state h3 {
+    color:red;
+    margin-bottom: 0.5rem;
+}
+
+/* Utility Classes */
+.hidden {
+    display: none;
+}
+
+/* AI Recommendations */
+.ai-recommendations {
+    background: rgba(240, 244, 255, 0.1);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    border-left: 4px solid rgba(102, 126, 234, 0.7);
+    backdrop-filter: blur(5px);
+}
+
+.ai-recommendations h3 {
+    color: rgb(0, 0, 0);
+    margin-bottom: 1rem;
+}
+
+.markdown-content {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: rgba(0, 0, 0, 0.9);
+}
+
+.markdown-content h2, 
+.markdown-content h3, 
+.markdown-content h4 {
+    color: rgb(0, 0, 0);
+    margin: 1.25rem 0 0.75rem 0;
+}
+
+.markdown-content h2 {
+    font-size: 1.3rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding-bottom: 0.5rem;
+}
+
+.markdown-content h3 {
+    font-size: 1.1rem;
+}
+
+.markdown-content h4 {
+    font-size: 1rem;
+}
+
+.markdown-content ul, 
+.markdown-content ol {
+    padding-left: 1.5rem;
+    margin: 0.75rem 0;
+}
+
+.markdown-content li {
+    margin-bottom: 0.5rem;
+    position: relative;
+}
+
+.markdown-content strong {
+    font-weight: 600;
+    color: rgb(0, 0, 0);
+}
+
+.markdown-content em {
+    font-style: italic;
+}
+
+.markdown-content blockquote {
+    border-left: 3px solid rgba(102, 126, 234, 0.7);
+    padding-left: 1rem;
+    margin: 1rem 0;
+    color: rgba(0, 0, 0, 0.8);
+}
+
+.markdown-content code {
+    font-family: monospace;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+}
+
+/* Glassmorphism Cards */
+.glass-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+    color: #8F5EC2;
+}
+
+.glass-card .card-title {
+    color: #4C4E78;
+}

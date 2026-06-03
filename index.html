@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Study Scheduler</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.35/build/spline-viewer.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header Section -->
+        <header class="app-header">
+            <div class="header-content">
+                <h1>🤖 IntellectoNova</h1>
+                <p class="subtitle">Smart Study Planning</p>
+            </div>
+        </header>
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="content-grid">
+                <!-- Left Column - Input Section -->
+                <div class="input-section">
+                    <!-- AI Assistant Chat -->
+                    <div class="card ai-chat-card glass-card">
+                        <h2 class="card-title">💬 AI Assistant</h2>
+                        <div class="chat-container">
+                            <div class="chat-messages" id="chatMessages">
+                                <div class="message ai-message">
+                                    Hi! I'm IntellectoNova. Add your subjects below and I'll help create the perfect study plan for you! 🎯
+                                </div>
+                            </div>
+                            <div class="chat-input">
+                                <input type="text" id="chatInput" placeholder="Ask me anything...">
+                                <button class="btn send-btn" onclick="sendMessage()">Send</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Subject Form -->
+                    <div class="card subject-form-card glass-card">
+                        <h2 class="card-title">➕ Add Subject</h2>
+                        <form id="subjectForm" onsubmit="addSubject(event)">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Subject Name</label>
+                                    <input type="text" id="subjectName" required placeholder="e.g., Mathematics">
+                                </div>
+                                <div class="form-group">
+                                    <label>Exam Date</label>
+                                    <input type="date" id="examDate" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Topic</label>
+                                <input type="text" id="topicName" required placeholder="e.g., Calculus">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Difficulty (1-10)</label>
+                                    <select id="difficulty">
+                                        <option value="3">3 - Easy</option>
+                                        <option value="5" selected>5 - Medium</option>
+                                        <option value="7">7 - Hard</option>
+                                        <option value="9">9 - Very Hard</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Importance (1-10)</label>
+                                    <select id="importance">
+                                        <option value="3">3 - Low</option>
+                                        <option value="5" selected>5 - Medium</option>
+                                        <option value="7">7 - High</option>
+                                        <option value="9">9 - Critical</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn primary-btn full-width">Add Subject</button>
+                        </form>
+                    </div>
+                    <!-- Subjects List -->
+                    <div class="card subjects-list-card glass-card">
+                        <h2 class="card-title">📚 My Subjects</h2>
+                        <div id="subjectsList" class="subjects-container">
+                            <div class="empty-state">
+                                <span class="emoji">📚</span>
+                                <p>No subjects added yet. Add your first subject above!</p>
+                            </div>
+                        </div>
+                        <button class="btn primary-btn full-width generate-btn" onclick="generateSchedule()">
+                            🎯 Generate AI Schedule
+                        </button>
+                    </div>
+                </div>
+                <!-- Right Column - Schedule Section -->
+                <div class="output-section">
+                    <!-- Schedule Display -->
+                    <div class="card schedule-card glass-card">
+                        <h2 class="card-title">📅 Your Study Schedule</h2>
+                        <div id="scheduleContent" class="schedule-container">
+                            <div class="empty-state">
+                                <span class="emoji">🤖</span>
+                                <h3>Ready to Generate Your Schedule!</h3>
+                                <p>Add subjects and click "Generate AI Schedule" to see your personalized study plan.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Schedule Stats -->
+                    <div class="card stats-card hidden" id="scheduleStats">
+                        <h2 class="card-title">📊 Schedule Overview</h2>
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <div class="stat-number" id="totalSessions">0</div>
+                                <div class="stat-label">Study Sessions</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number" id="totalHours">0h</div>
+                                <div class="stat-label">Total Hours</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number" id="studyDays">0</div>
+                                <div class="stat-label">Study Days</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
